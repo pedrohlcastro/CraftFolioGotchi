@@ -1,0 +1,19 @@
+<div class="nav-bar">
+  <a class="closebtn" (click)="changeNavBar(false)" matTooltip="Fechar Menu" matTooltipPosition="above">&times;</a>
+
+  <!-- ROTAS COMUNS USUARIO DESLOGADO -->
+  <a [routerLink]="['sign-in']" *ngIf="!isAuthenticated"><i class="material-icons">vpn_key</i>Login</a>
+  <a [routerLink]="['sign-up']" *ngIf="!isAuthenticated"><i class="material-icons">input</i>Cadastro</a>
+
+  
+
+  <!-- ROTAS COMUNS USUARIO AUTENTICADO -->
+
+</div>
+
+<div class="top-header">
+  <a (click)="changeNavBar(true)" matTooltip="Abrir Menu" matTooltipPosition="right">
+    <i class="material-icons" id="btnmenu" [hidden]="navBarOpen">menu</i>
+  </a>
+  <span class="title"><a [routerLink]="['/']">CraftFolioGotchi</a></span>
+</div>
