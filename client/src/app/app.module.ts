@@ -15,13 +15,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { AuthService } from './services/auth.service';
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     NavbarComponent,
-    SignInComponent
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
   BrowserModule,

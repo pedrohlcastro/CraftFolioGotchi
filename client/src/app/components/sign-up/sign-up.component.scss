@@ -1,4 +1,4 @@
-.login-box {
+.signup-box {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,7 +7,7 @@
 }
 
 mat-card{
-    min-height: 30vh;
+    min-height: 40vh;
 }
 
 
@@ -20,7 +20,7 @@ h1{
 
 .input {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 button {
