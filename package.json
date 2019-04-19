@@ -1,0 +1,36 @@
+{
+  "name": "craftfoliogotchi",
+  "version": "1.0.0",
+  "description": "CraftFolioGotchi - A portifolio with tamagochi",
+  "main": "index.js",
+  "scripts": {
+    "dev": "./node_modules/.bin/nodemon server/",
+    "start": "node server/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedrohlcastro/CraftFolioGotchi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedrohlcastro/CraftFolioGotchi/issues"
+  },
+  "homepage": "https://github.com/pedrohlcastro/CraftFolioGotchi#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "mongoose": "^5.5.2",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
+}
