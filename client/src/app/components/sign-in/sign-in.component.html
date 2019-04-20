@@ -26,8 +26,10 @@
             </mat-error>
           </mat-form-field>
 
-          <button mat-raised-button color="primary">Login</button>
-          <button mat-raised-button color="primary">Criar Conta</button>
+          <button mat-raised-button color="primary" (click)="login()">Login</button>
+          <a [routerLink]="['/sign-up']" *ngIf="!isAuthenticated">
+            <button mat-raised-button color="primary"> Criar Conta</button>
+          </a>
         </form>
       </mat-card-content>
     

@@ -28,14 +28,14 @@ export class AuthService {
   }
 
   createUser(userData){
-    return this.http.post(`/users`, userData)
+    return this.http.post(`/api/auth/signup`, userData)
       .map((res)=> {
         return res.json();
       });
   }
 
   loginUser(userData){
-    return this.http.post(`/users/signIn`, userData)
+    return this.http.post(`/api/auth/signin`, userData)
       .map((res)=> {
         const resJSON = res.json();
         this.userToken = resJSON.token || null;
@@ -50,7 +50,7 @@ export class AuthService {
 
   checkToken(){
     const options = this.addAuthHeader(true);
-    return this.http.get(`/users/checktoken`, options)
+    return this.http.get(`/api/auth/checktoken`, options)
       .map((res) => {
         const resJSON = res.json();
         if (resJSON.result === 'Success') {
@@ -60,16 +60,6 @@ export class AuthService {
       });
   }
   
-
-  getUserFromToken(){
-    const options = this.addAuthHeader(true);
-
-    return this.http.get(`/users/get_user`, options)
-    .map((res)=> {
-      return res.json();
-    });
-  }
-
   // logout method
   logout(): void {
     // clear token remove user from local storage to log user out
