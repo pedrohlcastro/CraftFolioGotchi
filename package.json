@@ -4,7 +4,7 @@
   "description": "CraftFolioGotchi - A portifolio with tamagochi",
   "main": "index.js",
   "scripts": {
-    "dev": "./node_modules/.bin/nodemon server/",
+    "dev": "export NODE_ENV=dev&&./node_modules/.bin/nodemon server/",
     "start": "node server/"
   },
   "repository": {
@@ -24,6 +24,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "helmet": "^3.16.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.2",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
