@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgImageSliderModule } from 'ng-image-slider';
+
 
 import { AppRoutingModule } from './app.module.routes';
 import { AppMaterialModule } from './app.module.material';
@@ -16,6 +18,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthService } from './services/auth.service';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { PortifolioComponent } from './components/portifolio/portifolio.component';
+import { PetComponent } from './components/pet/pet.component';
+import { EditGroundDialogComponent } from './components/edit-ground-dialog/edit-ground-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,13 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     HomePageComponent,
     NavbarComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    PortifolioComponent,
+    PetComponent,
+    EditGroundDialogComponent
+  ],
+  entryComponents: [
+    EditGroundDialogComponent,
   ],
   imports: [
   BrowserModule,
@@ -32,8 +43,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     AppMaterialModule,
     HttpModule,
     FormsModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    NgImageSliderModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

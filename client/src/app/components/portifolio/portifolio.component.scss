@@ -1,0 +1,45 @@
+.folio {
+    height: calc(100vh - 155px);
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    text-shadow: 0 1px 2px rgba(black,.15);
+    margin: 25px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    text-shadow: 0 1px 2px rgba(black,.15);
+    margin: 25px;
+}
+
+#ground {
+    background: radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px) 0px 10px,
+radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 16, 48, 0) 11px),
+#8a3;
+    background-size: 20px 20px;
+    height: 55px;
+    position: relative;
+    .edit-btn {
+        float: right;
+        display: inline;
+        margin: 5px;
+        margin-right: 20px;
+        color: white;
+    }
+    app-pet {
+        display: inline;
+    }
+}

@@ -1,0 +1,18 @@
+<section class="folio">
+  <h1>User</h1>
+  <div class="images">
+    <h2>Images</h2>
+    <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+  </div>
+  <div class="text-boxes">
+      <h2>Texts</h2>
+  </div>
+
+
+</section>
+<footer id="ground">
+  <app-pet></app-pet>
+  <button mat-mini-fab class="edit-btn" color="primary" matTooltip="Editar chão" matTooltipPosition="left" (click)="editGround()">
+      <mat-icon>edit</mat-icon>
+    </button>
+</footer>
