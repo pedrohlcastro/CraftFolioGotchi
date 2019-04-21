@@ -1,5 +1,7 @@
-<app-navbar></app-navbar>
+<section (keyup)="movePet($event)">
+    <app-navbar></app-navbar>
 
-<section id="content">
-    <router-outlet></router-outlet>
+    <section id="content">
+        <router-outlet></router-outlet>
+    </section>
 </section>

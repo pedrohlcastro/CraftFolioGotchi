@@ -1,3 +1,20 @@
-p{
+#pet {
     display: inline;
+    background: url("/assets/img/male.png") left center;
+    padding-right: 110px;
+    padding-top: 110px;
+}
+
+.move-right {
+    background: url("/assets/img/male.png") left center !important;
+    animation: play .8s steps(8) infinite !important;
+}
+
+.move-left {
+    background: url("/assets/img/male2.png") left center !important;
+    animation: play .8s steps(8) infinite !important;
+}
+
+@keyframes play {
+    100% { background-position: -864px; }
 }
