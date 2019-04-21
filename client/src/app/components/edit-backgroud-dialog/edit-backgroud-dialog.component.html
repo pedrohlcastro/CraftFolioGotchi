@@ -1,0 +1,27 @@
+<div class="inputs-area">
+  <mat-form-field>
+    <input matInput placeholder="Image URL" [(ngModel)]="image" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="LinearGradient Function" [(ngModel)]="linearGradient" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <mat-checkbox [(ngModel)]="repeat" [ngModelOptions]="{standalone: true}">
+    Repitir background?
+  </mat-checkbox>
+  <label for="color-picker">Cor do fundo</label>  
+  <input [(colorPicker)]="color" [style.background]="color" id="color-picker"/>  <br><br>
+
+  <label for="color-picker">Cor dos Titulos</label>
+  <input [(colorPicker)]="fontColor" [style.background]="fontColor" id="color-picker"/>
+  
+      
+</div>
+
+<div class="btn-area">
+  <button mat-raised-button class="delete-btn" color="warn" (click)="exit(false)">
+    <i class="material-icons">cancel</i> Cancelar
+  </button>
+  <button mat-raised-button class="edit-btn" color="primary" (click)="exit(true)">
+    <i class="material-icons">check</i> Confirmar
+  </button>
+</div>

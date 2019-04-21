@@ -3,6 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
 import { AppRoutingModule } from './app.module.routes';
@@ -21,6 +22,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { PortifolioComponent } from './components/portifolio/portifolio.component';
 import { PetComponent } from './components/pet/pet.component';
 import { EditGroundDialogComponent } from './components/edit-ground-dialog/edit-ground-dialog.component';
+import { EditBackgroudDialogComponent } from './components/edit-backgroud-dialog/edit-backgroud-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +33,12 @@ import { EditGroundDialogComponent } from './components/edit-ground-dialog/edit-
     SignUpComponent,
     PortifolioComponent,
     PetComponent,
-    EditGroundDialogComponent
+    EditGroundDialogComponent,
+    EditBackgroudDialogComponent
   ],
   entryComponents: [
     EditGroundDialogComponent,
+    EditBackgroudDialogComponent
   ],
   imports: [
   BrowserModule,
@@ -44,7 +48,8 @@ import { EditGroundDialogComponent } from './components/edit-ground-dialog/edit-
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    ColorPickerModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

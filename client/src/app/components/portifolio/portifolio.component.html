@@ -1,4 +1,7 @@
 <section class="folio">
+    <button mat-mini-fab id="edit-background-btn" color="primary" matTooltip="Editar Fundo" matTooltipPosition="right" (click)="editBackground()">
+      <mat-icon>edit</mat-icon>
+    </button>
   <h1>User</h1>
   <div class="images">
     <h2>Images</h2>
@@ -7,12 +10,10 @@
   <div class="text-boxes">
       <h2>Texts</h2>
   </div>
-
-
 </section>
 <footer id="ground">
   <app-pet></app-pet>
   <button mat-mini-fab class="edit-btn" color="primary" matTooltip="Editar chão" matTooltipPosition="left" (click)="editGround()">
-      <mat-icon>edit</mat-icon>
-    </button>
+    <mat-icon>edit</mat-icon>
+  </button>
 </footer>

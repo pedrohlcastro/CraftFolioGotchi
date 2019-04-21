@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EditGroundDialogComponent } from '../edit-ground-dialog/edit-ground-dialog.component';
 import { MatDialog } from '@angular/material';
+import { EditBackgroudDialogComponent } from '../edit-backgroud-dialog/edit-backgroud-dialog.component';
 
 declare const $;
 
@@ -37,6 +38,28 @@ export class PortifolioComponent implements OnInit {
           ground.css('background-image', result.ground["background-image"])
           ground.css('background-color', result.ground["background-color"])
         }
+      }
+    });
+  }
+
+  editBackground() {
+    let dialogRef = this.dialog.open(EditBackgroudDialogComponent, {
+      width: '75%'
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      if(result) {
+        const folio = $('.folio')
+        folio.css('background', '')
+        folio.css('background-image', '')
+        folio.css('background-repeat', '')
+        folio.css('background-color', '')
+
+        folio.css('background-image', result["background-image"])
+        folio.css('background-color', result["background-color"])
+        folio.css('background-repeat', result["background-repeat"])
+        $('h1').css('color', result["color"])
+        $('h2').css('color', result["color"])
       }
     });
   }

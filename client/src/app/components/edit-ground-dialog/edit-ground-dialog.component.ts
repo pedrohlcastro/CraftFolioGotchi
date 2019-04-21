@@ -28,7 +28,6 @@ export class EditGroundDialogComponent implements OnInit {
     },
   ]
   constructor(
-    private snackBar:MatSnackBar,
     public dialogRef: MatDialogRef<PortifolioComponent>,
     @Inject(MAT_DIALOG_DATA) public dataReceive: any
   ) { }
