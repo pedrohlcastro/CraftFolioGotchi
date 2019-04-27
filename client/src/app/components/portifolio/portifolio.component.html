@@ -33,15 +33,14 @@
             (page)="pageEvent = $event">
         </mat-paginator>
       </div>
-      
-      <div ng-if="texts"
-        [style.backgroundColor]="texts[pageEvent ? pageEvent.pageIndex : 0]['background-color']"
-        [style.border-color]="texts[pageEvent ? pageEvent.pageIndex : 0]['border-color']"
-        [style.font-size]="texts[pageEvent ? pageEvent.pageIndex : 0]['font-size']"
-        [style.color]="texts[pageEvent ? pageEvent.pageIndex : 0]['text-color']"
-      >
-        <span>{{ texts[pageEvent ? pageEvent.pageIndex : 0].text }}</span>
-    </div>
+          <div *ngIf="texts.length"
+          [style.backgroundColor]="texts[pageEvent ? pageEvent.pageIndex : 0]['background-color']"
+          [style.border-color]="texts[pageEvent ? pageEvent.pageIndex : 0]['border-color']"
+          [style.font-size]="texts[pageEvent ? pageEvent.pageIndex : 0]['font-size']"
+          [style.color]="texts[pageEvent ? pageEvent.pageIndex : 0]['text-color']"
+        >
+          <span>{{ texts[pageEvent ? pageEvent.pageIndex : 0].text }}</span>
+      </div> 
   </div>
 </section>
 <footer id="ground">

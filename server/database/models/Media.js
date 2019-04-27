@@ -1,12 +1,19 @@
 const mongoose = require('mongoose');
-require('mongoose-type-url');
 
 const Schema = mongoose.Schema;
 
-const imageSchema = new Schema({
+const mediaSchema = new Schema({
     image: {
-        type: mongoose.SchemaTypes.Url,
-        required: true,
+        type: String,
+        required: false,
+    },
+    video: {
+        type: String,
+        required: false,
+    },
+    thumbImage: {
+        type: String,
+        required: false,
     },
     title: {
         type: String,
@@ -19,4 +26,4 @@ const imageSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('Image', imageSchema);
+module.exports = mongoose.model('Media', mediaSchema);

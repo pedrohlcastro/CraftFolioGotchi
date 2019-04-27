@@ -9,6 +9,7 @@ import { TextService } from '../../services/text.service';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { NgImageSliderComponent } from 'ng-image-slider';
 import { EditImgOrVideoDialogComponent } from '../edit-img-or-video-dialog/edit-img-or-video-dialog.component';
+import { MediaService } from '../../services/media.service';
 
 declare const $;
 
@@ -18,18 +19,7 @@ declare const $;
   styleUrls: ['./portifolio.component.scss']
 })
 export class PortifolioComponent implements OnInit {
-  medias = [
-    {
-      image: 'https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-      thumbImage: 'https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-      video: ''
-    },
-    {
-      image: '',
-      thumbImage: '',
-      video: 'https://youtu.be/6pxRHBw-k8M' // Youtube url
-    },
-  ]
+  medias = []
   sliderImageWidth = 1080
   sliderImageHeight = 200
   currentImageIndex = 0
@@ -46,7 +36,8 @@ export class PortifolioComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private layoutService: LayoutService,
     private snackBar: MatSnackBar,
-    private textService: TextService
+    private textService: TextService,
+    private mediaService: MediaService
   ) { }
 
   ngOnInit() {
@@ -61,6 +52,9 @@ export class PortifolioComponent implements OnInit {
       this.setBackground(res.background);
       this.textService.getAllByUser(this.userId).subscribe((res) => {
         this.texts = res;
+        this.mediaService.getAllByUser(this.userId).subscribe((resMedia) => {
+          this.medias = resMedia
+        })
       })
     })
   }
@@ -197,12 +191,12 @@ export class PortifolioComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe( result => {
       if(result) {
-        // this.textService.createText(result).subscribe((res) => {
-          // if(res) {
+        this.mediaService.createMedia(result).subscribe((res) => {
+          if(res) {
             this.medias.push(result)
             this.snackBar.open("Img/Video criado com sucesso. Para ver as mudanças é preciso atualizar a pagina", 'Fechar', {duration: 8000});
-          // }
-        // });
+          }
+        });
       }
     });
   }
@@ -216,18 +210,18 @@ export class PortifolioComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe( result => {
       if(result) {
-        // this.textService.updateText(result, currentText._id).subscribe((res) => {
-          // if(res) {
+        this.mediaService.updateMedia(result, currentMedia._id).subscribe((res) => {
+          if(res) {
             this.medias[this.currentImageIndex] = result
-            this.snackBar.open("Img/Video atualizado com sucesso. Para ver as mudanças é preciso atualizar a pagina", 'Fechar', {duration: 8000});
-          // }
-        // });
+            this.snackBar.open("Img/Video atualizado com sucesso.", 'Fechar', {duration: 8000});
+          }
+        });
       }
     });
   }
 
   deleteMedia() {
-    const currentMedia = this.texts[this.currentImageIndex]
+    const currentMedia = this.medias[this.currentImageIndex]
     let dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '75%',
       data: "Você tem certeza que deseja deletar essa imagem ou video?"
@@ -235,12 +229,12 @@ export class PortifolioComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        // this.textService.deleteText(currentMedia._id).subscribe((res) => {
-          // if(res) {
+        this.mediaService.deleteMedia(currentMedia._id).subscribe((res) => {
+          if(res) {
             this.medias.splice(this.currentImageIndex,1);
             this.snackBar.open("Img/Video deletado com sucesso. Para ver as mudanças é preciso atualizar a pagina", 'Fechar', {duration: 8000});
-          // }
-        // })
+          }
+        })
       }
     })
   }

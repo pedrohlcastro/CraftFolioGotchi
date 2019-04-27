@@ -11,6 +11,7 @@ export class EditImgOrVideoDialogComponent implements OnInit {
   isVideo:boolean = false
   image:string
   video:string
+  title:string
   constructor(
     public dialogRef: MatDialogRef<PortifolioComponent>,
     @Inject(MAT_DIALOG_DATA) public dataReceive: any
@@ -19,11 +20,12 @@ export class EditImgOrVideoDialogComponent implements OnInit {
       this.isVideo = dataReceive["video"] != "";
       this.image = dataReceive["image"];
       this.video = dataReceive["video"];
-      console.log(this.isVideo)
+      this.title = dataReceive["title"];
     }
   }
 
   ngOnInit() {
+    console.log(this.isVideo)
   }
 
 
@@ -35,13 +37,15 @@ export class EditImgOrVideoDialogComponent implements OnInit {
         this.dialogRef.close({
           video: this.video,
           image: "",
-          thumbImage: ""
+          thumbImage: "",
+          title: this.title
         })
       } else if(!this.isVideo && this.image != "") {
         this.dialogRef.close({
           video: "",
           image: this.image,
-          thumbImage: this.image
+          thumbImage: this.image,
+          title: this.title
         })
       } else {
         this.dialogRef.close(false)

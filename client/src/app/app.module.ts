@@ -28,6 +28,7 @@ import { EditTextDialogComponent } from './components/edit-text-dialog/edit-text
 import { TextService } from './services/text.service';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { EditImgOrVideoDialogComponent } from './components/edit-img-or-video-dialog/edit-img-or-video-dialog.component';
+import { MediaService } from './services/media.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { EditImgOrVideoDialogComponent } from './components/edit-img-or-video-di
     NgImageSliderModule,
     ColorPickerModule,
   ],
-  providers: [AuthService, LayoutService, TextService],
+  providers: [AuthService, LayoutService, TextService, MediaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

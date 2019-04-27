@@ -7,7 +7,7 @@ const router = new Router();
 
 router.get('/:userId', (req, res, next) => {
     const userId = req.params.userId;
-    controllers.Text.getAllByUser(userId)
+    controllers.Media.getAllByUser(userId)
         .then((data) => {
             res.status(200).json(data);
         })
@@ -16,10 +16,10 @@ router.get('/:userId', (req, res, next) => {
         });
 });
 
-router.put('/:textId', passport.authenticate('BasicBearer', { session: false }), (req, res, next) => {
-    const textId = req.params.textId;
+router.put('/:mediaId', passport.authenticate('BasicBearer', { session: false }), (req, res, next) => {
+    const mediaId = req.params.mediaId;
     const updateData = req.body;
-    controllers.Text.editText(textId, updateData)
+    controllers.Media.editMedia(mediaId, updateData)
         .then((data) => {
             res.status(200).json(data);
         })
@@ -28,9 +28,9 @@ router.put('/:textId', passport.authenticate('BasicBearer', { session: false }),
         });
 });
 
-router.delete('/:textId', passport.authenticate('BasicBearer', { session: false }), (req, res, next) => {
-    const textId = req.params.textId;
-    controllers.Text.deleteText(textId)
+router.delete('/:mediaId', passport.authenticate('BasicBearer', { session: false }), (req, res, next) => {
+    const mediaId = req.params.mediaId;
+    controllers.Media.deleteMedia(mediaId)
         .then((data) => {
             res.status(200).json(data);
         })
@@ -41,8 +41,8 @@ router.delete('/:textId', passport.authenticate('BasicBearer', { session: false 
 
 router.post('/', passport.authenticate('BasicBearer', { session: false }), (req, res, next) => {
     const userId = req.user.id;
-    const newText = req.body;
-    controllers.Text.createText(newText, userId)
+    const newMedia = req.body;
+    controllers.Media.createMedia(newMedia, userId)
         .then((data) => {
             res.status(200).json(data);
         })
