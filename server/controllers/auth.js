@@ -8,6 +8,18 @@ class AuthController {
         this.jwtSecret = process.env.JWT_SECRET || 'super-craft';
     }
 
+    getName(userId) {
+        return new Promise((resolve, reject) => {
+            this.models.User.findById(userId).select({ name: 1 })
+                .exec((err, data) => {
+                    if (err) {
+                        reject({ status: 500, msg: 'Internal Erro', err });
+                    } else {
+                        resolve(data);
+                    }
+                });
+        });
+    }
 
     createUser(user) {
         return new Promise((resolve, reject) => {

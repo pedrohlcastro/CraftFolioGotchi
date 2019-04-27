@@ -1,17 +1,17 @@
 <section class="folio">
-    <button mat-mini-fab id="edit-background-btn" color="primary" matTooltip="Editar Fundo" matTooltipPosition="right" (click)="editBackground()">
+    <button  *ngIf="isAuthenticated"mat-mini-fab id="edit-background-btn" color="primary" matTooltip="Editar Fundo" matTooltipPosition="right" (click)="editBackground()">
       <mat-icon>edit</mat-icon>
     </button>
-  <h1>User</h1>
+  <h1>User: {{userName}}</h1>
   <div class="images">
     <h2>Images</h2>
-    <button (click)="editMedia($event)" id="edit-img-btn" mat-mini-fab color="primary" matTooltip="Editar Image ou Vídeo" matTooltipPosition="right">
+    <button  *ngIf="isAuthenticated"(click)="editMedia($event)" id="edit-img-btn" mat-mini-fab color="primary" matTooltip="Editar Image ou Vídeo" matTooltipPosition="right">
       <mat-icon>edit</mat-icon>
     </button>
-    <button (click)="createMedia()" id="create-img-btn" mat-mini-fab color="primary" matTooltip="Adicionar nova Image ou Vídeo" matTooltipPosition="right">
+    <button  *ngIf="isAuthenticated"(click)="createMedia()" id="create-img-btn" mat-mini-fab color="primary" matTooltip="Adicionar nova Image ou Vídeo" matTooltipPosition="right">
       <mat-icon>add</mat-icon>
     </button>
-    <button (click)="deleteMedia()" id="delete-img-btn" mat-mini-fab  color="primary" matTooltip="Deletar Image ou Vídeo" matTooltipPosition="right">
+    <button  *ngIf="isAuthenticated"(click)="deleteMedia()" id="delete-img-btn" mat-mini-fab  color="primary" matTooltip="Deletar Image ou Vídeo" matTooltipPosition="right">
       <mat-icon>delete</mat-icon>
     </button>
     <ng-image-slider (arrowClick)="switchImage($event)" (lightboxArrowClick)="switchImage($event)" [images]="medias" [imageSize]="{width: sliderImageWidth, height: sliderImageHeight}" #nav></ng-image-slider>
@@ -19,13 +19,13 @@
   <div class="text-boxes">
       <h2>Texts</h2>
       <div class="comands">
-        <button (click)="editText()" mat-mini-fab color="primary" matTooltip="Editar Texto" matTooltipPosition="right">
+        <button  *ngIf="isAuthenticated"(click)="editText()" mat-mini-fab color="primary" matTooltip="Editar Texto" matTooltipPosition="right">
           <mat-icon>edit</mat-icon>
         </button>
-        <button (click)="createText()" mat-mini-fab color="primary" matTooltip="Adicionar novo Texto" matTooltipPosition="right">
+        <button  *ngIf="isAuthenticated"(click)="createText()" mat-mini-fab color="primary" matTooltip="Adicionar novo Texto" matTooltipPosition="right">
           <mat-icon>add</mat-icon>
         </button>
-        <button (click)="deleteText()" mat-mini-fab  color="primary" matTooltip="Deletar Texto" matTooltipPosition="right">
+        <button  *ngIf="isAuthenticated"(click)="deleteText()" mat-mini-fab  color="primary" matTooltip="Deletar Texto" matTooltipPosition="right">
           <mat-icon>delete</mat-icon>
         </button>
         <mat-paginator [length]="texts.length"
@@ -45,7 +45,7 @@
 </section>
 <footer id="ground">
   <app-pet></app-pet>
-  <button mat-mini-fab class="edit-btn" color="primary" matTooltip="Editar chão" matTooltipPosition="left" (click)="editGround()">
+  <button  *ngIf="isAuthenticated"mat-mini-fab class="edit-btn" color="primary" matTooltip="Editar chão" matTooltipPosition="left" (click)="editGround()">
     <mat-icon>edit</mat-icon>
   </button>
 </footer>

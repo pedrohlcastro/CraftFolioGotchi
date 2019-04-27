@@ -75,6 +75,17 @@ export class AuthService {
       }
     }
   }
+
+  getName(userId) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.getToken());
+    const options = new RequestOptions({ headers: headers });
+    return this.http.get(`/api/auth/name/${userId}`, options)
+      .map((res) => {
+        return res.json();
+      });
+  }
   
   // logout method
   logout(): void {

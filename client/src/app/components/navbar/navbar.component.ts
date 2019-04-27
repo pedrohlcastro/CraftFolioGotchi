@@ -13,9 +13,11 @@ declare const $;
 export class NavbarComponent implements OnInit {
   navBarOpen = false;
   isAuthenticated: boolean;
+  userId:string;
 
   constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
     this.authService.loggedIn.subscribe(status => this.isAuthenticated = status);
+    this.authService.userIdChange.subscribe(userId => this.userId)
   }
 
   ngOnInit() {
@@ -29,6 +31,18 @@ export class NavbarComponent implements OnInit {
     } else {
       this.closeNavBar();
     }
+  }
+
+  navToEdit() {
+    this.router.navigateByUrl(`/folio/${this.userId}`);
+  }
+
+  share() {
+    console.log("share")
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   openNavBar(){

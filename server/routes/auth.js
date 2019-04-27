@@ -5,6 +5,18 @@ const controllers = require('../controllers');
 
 const router = new Router();
 
+
+router.get('/name/:userId', (req, res, next) => {
+    const userId = req.params.userId;
+    controllers.Auth.getName(userId)
+        .then((data) => {
+            res.status(200).json(data);
+        })
+        .catch((err) => {
+            next(err);
+        });
+});
+
 // SignUp route
 router.post('/signup', (req, res, next) => {
     const user = req.body;

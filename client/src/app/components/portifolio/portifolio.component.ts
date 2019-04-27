@@ -10,6 +10,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 import { NgImageSliderComponent } from 'ng-image-slider';
 import { EditImgOrVideoDialogComponent } from '../edit-img-or-video-dialog/edit-img-or-video-dialog.component';
 import { MediaService } from '../../services/media.service';
+import { AuthService } from '../../services/auth.service';
 
 declare const $;
 
@@ -19,6 +20,9 @@ declare const $;
   styleUrls: ['./portifolio.component.scss']
 })
 export class PortifolioComponent implements OnInit {
+  isAuthenticated:boolean;
+  userName:string;
+
   medias = []
   sliderImageWidth = 1080
   sliderImageHeight = 200
@@ -36,11 +40,13 @@ export class PortifolioComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private layoutService: LayoutService,
     private snackBar: MatSnackBar,
+    private authService: AuthService,
     private textService: TextService,
     private mediaService: MediaService
   ) { }
 
   ngOnInit() {
+    this.authService.loggedIn.subscribe(status => this.isAuthenticated = status);
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId')
     this.sliderImageWidth = $(document).width()
     $( window ).resize(() => {
@@ -54,6 +60,9 @@ export class PortifolioComponent implements OnInit {
         this.texts = res;
         this.mediaService.getAllByUser(this.userId).subscribe((resMedia) => {
           this.medias = resMedia
+          this.authService.getName(this.userId).subscribe((resName) => {
+            this.userName = resName.name;
+          })
         })
       })
     })
