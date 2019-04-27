@@ -49,3 +49,23 @@ radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #613 10px, rgba(96, 
         display: inline;
     }
 }
+
+.text-boxes {
+    width: 100%;
+    mat-paginator {
+        width: 90%;
+        margin-right: 10%;
+        font-size: 10px;
+        background-color: transparent;
+    }
+    div {
+        width: 80%;
+        height: 10vh;
+        margin-left: 10%;
+        margin-right: 10%;
+        border: 3px solid transparent;
+        span {
+            margin: 10px;
+        }
+    }
+}

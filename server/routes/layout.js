@@ -7,7 +7,6 @@ const router = new Router();
 
 router.get('/:userId', (req, res, next) => {
     const userId = req.params.userId;
-    console.log(userId)
     controllers.Layout.getLayout(userId)
         .then((data) => {
             res.status(200).json(data);

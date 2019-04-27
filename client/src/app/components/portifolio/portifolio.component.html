@@ -9,6 +9,18 @@
   </div>
   <div class="text-boxes">
       <h2>Texts</h2>
+      <mat-paginator [length]="texts.length"
+          pageSize="1"
+          (page)="pageEvent = $event">
+      </mat-paginator>
+      <div
+        [style.backgroundColor]="texts[pageEvent ? pageEvent.pageIndex : 0]['background-color']"
+        [style.border-color]="texts[pageEvent ? pageEvent.pageIndex : 0]['border-color']"
+        [style.font-size]="texts[pageEvent ? pageEvent.pageIndex : 0]['font-size']"
+        [style.color]="texts[pageEvent ? pageEvent.pageIndex : 0]['text-color']"
+      >
+        <span>{{ texts[pageEvent ? pageEvent.pageIndex : 0].text }}</span>
+    </div>
   </div>
 </section>
 <footer id="ground">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditGroundDialogComponent } from '../edit-ground-dialog/edit-ground-dialog.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, PageEvent } from '@angular/material';
 import { EditBackgroudDialogComponent } from '../edit-backgroud-dialog/edit-backgroud-dialog.component';
 import { ActivatedRoute } from '@angular/router';
 import { LayoutService } from '../../services/layout.service';
@@ -15,6 +15,25 @@ declare const $;
 export class PortifolioComponent implements OnInit {
   imageObject:Array<object>
   userId
+  layout
+  texts = [
+    {
+      "text": "Some random lorem text",
+      "background-color": "white",
+      "border-color": "blue",
+      "font-size": "30px",
+      "text-color": "black"
+    },
+    {
+      "text": "Some random lorem text 222",
+      "background-color": "black",
+      "border-color": "blue",
+      "font-size": "30px",
+      "text-color": "white"
+    },
+  ]
+  // MatPaginator Output
+  pageEvent: PageEvent;
   constructor(
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
@@ -25,6 +44,7 @@ export class PortifolioComponent implements OnInit {
   ngOnInit() {
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId')
     this.layoutService.getLayout(this.userId).subscribe((res) => {
+      this.layout = res;
       this.setGround(res.ground);
       this.setBackground(res.background);
     })
@@ -32,7 +52,7 @@ export class PortifolioComponent implements OnInit {
 
   editGround(){
     let dialogRef = this.dialog.open(EditGroundDialogComponent, {
-      width: '75%'
+      width: '75%',
     });
 
     dialogRef.afterClosed().subscribe( result => {
@@ -66,7 +86,8 @@ export class PortifolioComponent implements OnInit {
 
   editBackground() {
     let dialogRef = this.dialog.open(EditBackgroudDialogComponent, {
-      width: '75%'
+      width: '75%',
+      data: this.layout.background
     });
 
     dialogRef.afterClosed().subscribe( result => {
@@ -82,6 +103,7 @@ export class PortifolioComponent implements OnInit {
 
   setBackground(background) {
     if(background) {
+      this.layout.background = background;
       const folio = $('.folio')
       folio.css('background', '')
       folio.css('background-image', '')
@@ -93,6 +115,9 @@ export class PortifolioComponent implements OnInit {
       folio.css('background-repeat', background["background-repeat"])
       $('h1').css('color', background["color"])
       $('h2').css('color', background["color"])
+      $('mat-paginator').css('color', background["color"])
     }
   }
+
+
 }

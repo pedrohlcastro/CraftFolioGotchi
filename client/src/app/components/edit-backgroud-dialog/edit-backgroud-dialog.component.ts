@@ -5,7 +5,7 @@ import { PortifolioComponent } from '../portifolio/portifolio.component';
 @Component({
   selector: 'app-edit-backgroud-dialog',
   templateUrl: './edit-backgroud-dialog.component.html',
-  styleUrls: ['./edit-backgroud-dialog.component.scss']
+  styleUrls: ['./edit-backgroud-dialog.component.scss'],
 })
 export class EditBackgroudDialogComponent implements OnInit {
   color:string
@@ -17,7 +17,13 @@ export class EditBackgroudDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<PortifolioComponent>,
     @Inject(MAT_DIALOG_DATA) public dataReceive: any
-  ) { }
+  ) {
+    if (dataReceive) {
+      this.fontColor = dataReceive.color;
+      this.repeat = dataReceive["background-repeat"] == "repeat";
+      this.color = dataReceive["background-color"];
+    }
+  }
 
   ngOnInit() {
   }
