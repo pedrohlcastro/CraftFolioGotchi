@@ -27,6 +27,7 @@ import { LayoutService } from './services/layout.service';
 import { EditTextDialogComponent } from './components/edit-text-dialog/edit-text-dialog.component';
 import { TextService } from './services/text.service';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { EditImgOrVideoDialogComponent } from './components/edit-img-or-video-dialog/edit-img-or-video-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,13 +41,15 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     EditGroundDialogComponent,
     EditBackgroudDialogComponent,
     EditTextDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    EditImgOrVideoDialogComponent
   ],
   entryComponents: [
     EditGroundDialogComponent,
     EditBackgroudDialogComponent,
     EditTextDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    EditImgOrVideoDialogComponent
   ],
   imports: [
     BrowserModule,

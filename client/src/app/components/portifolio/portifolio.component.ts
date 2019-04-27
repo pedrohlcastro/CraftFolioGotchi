@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EditGroundDialogComponent } from '../edit-ground-dialog/edit-ground-dialog.component';
 import { MatDialog, MatSnackBar, PageEvent } from '@angular/material';
 import { EditBackgroudDialogComponent } from '../edit-backgroud-dialog/edit-backgroud-dialog.component';
@@ -7,6 +7,8 @@ import { LayoutService } from '../../services/layout.service';
 import { EditTextDialogComponent } from '../edit-text-dialog/edit-text-dialog.component';
 import { TextService } from '../../services/text.service';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { NgImageSliderComponent } from 'ng-image-slider';
+import { EditImgOrVideoDialogComponent } from '../edit-img-or-video-dialog/edit-img-or-video-dialog.component';
 
 declare const $;
 
@@ -16,12 +18,29 @@ declare const $;
   styleUrls: ['./portifolio.component.scss']
 })
 export class PortifolioComponent implements OnInit {
-  imageObject:Array<object>
+  medias = [
+    {
+      image: 'https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      thumbImage: 'https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+      video: ''
+    },
+    {
+      image: '',
+      thumbImage: '',
+      video: 'https://youtu.be/6pxRHBw-k8M' // Youtube url
+    },
+  ]
+  sliderImageWidth = 1080
+  sliderImageHeight = 200
+  currentImageIndex = 0
+  @ViewChild('nav') slider: NgImageSliderComponent;
+
   userId
   layout
   texts = []
-  // MatPaginator Output
   pageEvent: PageEvent;
+  
+  
   constructor(
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
@@ -32,6 +51,10 @@ export class PortifolioComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId')
+    this.sliderImageWidth = $(document).width()
+    $( window ).resize(() => {
+      this.sliderImageWidth = $(document).width()
+    });
     this.layoutService.getLayout(this.userId).subscribe((res) => {
       this.layout = res;
       this.setGround(res.ground);
@@ -121,6 +144,7 @@ export class PortifolioComponent implements OnInit {
         this.textService.createText(result).subscribe((res) => {
           if(res) {
             this.texts.push(res)
+            this.snackBar.open("Texto criado com sucesso.", 'Fechar', {duration: 3000});
           }
         });
       }
@@ -139,6 +163,7 @@ export class PortifolioComponent implements OnInit {
         this.textService.updateText(result, currentText._id).subscribe((res) => {
           if(res) {
             this.texts[this.pageEvent ? this.pageEvent.pageIndex : 0] = result
+            this.snackBar.open("Texto atualizado com sucesso.", 'Fechar', {duration: 3000});
           }
         });
       }
@@ -156,11 +181,77 @@ export class PortifolioComponent implements OnInit {
       if(result) {
         this.textService.deleteText(currentText._id).subscribe((res) => {
           if(res) {
-            this.texts.splice(currentText._id,1);
+            this.texts.splice(this.pageEvent ? this.pageEvent.pageIndex : 0 ,1);
+            this.snackBar.open("Texto deletado com sucesso.", 'Fechar', {duration: 3000});
           }
         })
       }
     })
   }
+
+
+  createMedia() {
+    let dialogRef = this.dialog.open(EditImgOrVideoDialogComponent, {
+      width: '75%'
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      if(result) {
+        // this.textService.createText(result).subscribe((res) => {
+          // if(res) {
+            this.medias.push(result)
+            this.snackBar.open("Img/Video criado com sucesso. Para ver as mudanças é preciso atualizar a pagina", 'Fechar', {duration: 8000});
+          // }
+        // });
+      }
+    });
+  }
+
+  editMedia() {
+    const currentMedia = this.medias[this.currentImageIndex]
+    let dialogRef = this.dialog.open(EditImgOrVideoDialogComponent, {
+      width: '75%',
+      data: currentMedia
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      if(result) {
+        // this.textService.updateText(result, currentText._id).subscribe((res) => {
+          // if(res) {
+            this.medias[this.currentImageIndex] = result
+            this.snackBar.open("Img/Video atualizado com sucesso. Para ver as mudanças é preciso atualizar a pagina", 'Fechar', {duration: 8000});
+          // }
+        // });
+      }
+    });
+  }
+
+  deleteMedia() {
+    const currentMedia = this.texts[this.currentImageIndex]
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '75%',
+      data: "Você tem certeza que deseja deletar essa imagem ou video?"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        // this.textService.deleteText(currentMedia._id).subscribe((res) => {
+          // if(res) {
+            this.medias.splice(this.currentImageIndex,1);
+            this.snackBar.open("Img/Video deletado com sucesso. Para ver as mudanças é preciso atualizar a pagina", 'Fechar', {duration: 8000});
+          // }
+        // })
+      }
+    })
+  }
+
+  switchImage(ev) {
+    if(ev == "next" && this.currentImageIndex < this.medias.length -1 ){
+      this.currentImageIndex++
+    } else if (ev == "previous" && this.currentImageIndex >= 0){
+      this.currentImageIndex--
+    }
+  }
+
 
 }

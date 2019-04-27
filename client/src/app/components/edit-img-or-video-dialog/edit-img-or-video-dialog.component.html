@@ -1,0 +1,20 @@
+<div class="inputs-area">
+    <mat-checkbox [(ngModel)]="isVideo" [ngModelOptions]="{standalone: true}">
+      É um video?
+    </mat-checkbox>
+    <mat-form-field *ngIf="isVideo">
+      <input matInput type="url" placeholder="URL do video"  [(ngModel)]="video" [ngModelOptions]="{standalone: true}" required>
+    </mat-form-field>
+    <mat-form-field *ngIf="!isVideo">
+      <input matInput type="url" placeholder="URL da Imagem" [(ngModel)]="image" [ngModelOptions]="{standalone: true}" required>
+    </mat-form-field>
+  </div>
+  
+  <div class="btn-area">
+    <button mat-raised-button color="warn" (click)="exit(false)">
+      <i class="material-icons">cancel</i> Cancelar
+    </button>
+    <button mat-raised-button color="primary" (click)="exit(true)">
+      <i class="material-icons">check</i> Confirmar
+    </button>
+  </div>

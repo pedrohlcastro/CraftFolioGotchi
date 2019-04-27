@@ -5,7 +5,16 @@
   <h1>User</h1>
   <div class="images">
     <h2>Images</h2>
-    <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+    <button (click)="editMedia($event)" id="edit-img-btn" mat-mini-fab color="primary" matTooltip="Editar Image ou Vídeo" matTooltipPosition="right">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button (click)="createMedia()" id="create-img-btn" mat-mini-fab color="primary" matTooltip="Adicionar nova Image ou Vídeo" matTooltipPosition="right">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button (click)="deleteMedia()" id="delete-img-btn" mat-mini-fab  color="primary" matTooltip="Deletar Image ou Vídeo" matTooltipPosition="right">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <ng-image-slider (arrowClick)="switchImage($event)" (lightboxArrowClick)="switchImage($event)" [images]="medias" [imageSize]="{width: sliderImageWidth, height: sliderImageHeight}" #nav></ng-image-slider>
   </div>
   <div class="text-boxes">
       <h2>Texts</h2>
