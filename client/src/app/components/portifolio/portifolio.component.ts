@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EditGroundDialogComponent } from '../edit-ground-dialog/edit-ground-dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditBackgroudDialogComponent } from '../edit-backgroud-dialog/edit-backgroud-dialog.component';
+import { ActivatedRoute } from '@angular/router';
+import { LayoutService } from '../../services/layout.service';
 
 declare const $;
 
@@ -12,11 +14,20 @@ declare const $;
 })
 export class PortifolioComponent implements OnInit {
   imageObject:Array<object>
+  userId
   constructor(
     private dialog: MatDialog,
+    private activatedRoute: ActivatedRoute,
+    private layoutService: LayoutService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
+    this.userId = this.activatedRoute.snapshot.paramMap.get('userId')
+    this.layoutService.getLayout(this.userId).subscribe((res) => {
+      this.setGround(res.ground);
+      this.setBackground(res.background);
+    })
   }
 
   editGround(){
@@ -25,21 +36,32 @@ export class PortifolioComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe( result => {
+      this.setGround(result)
       if(result) {
-        const ground = $('#ground')
-        ground.css('background', '')
-        ground.css('background-size', '')
-        if(result.isImage){
-          ground.css('background-image', result.imageUrl)
-          ground.css('background-repeat', 'repeat')
-        } else {
-          ground.css('background', result.ground["background"])
-          ground.css('background-size', result.ground["background-size"])
-          ground.css('background-image', result.ground["background-image"])
-          ground.css('background-color', result.ground["background-color"])
-        }
+        this.layoutService.updateLayout(this.userId, {ground: result})
+          .subscribe(res => {
+            this.snackBar.open("Ground atualizado com sucesso.", 'Fechar', {duration: 3000});
+          })
       }
+      
     });
+  }
+
+  setGround(groundUpdate) {
+    if(groundUpdate) {
+      const ground = $('#ground')
+      ground.css('background', '')
+      ground.css('background-size', '')
+      if(ground.isImage){
+        ground.css('background-image', groundUpdate.imageUrl)
+        ground.css('background-repeat', 'repeat')
+      } else {
+        ground.css('background', groundUpdate.ground["background"])
+        ground.css('background-size', groundUpdate.ground["background-size"])
+        ground.css('background-image', groundUpdate.ground["background-image"])
+        ground.css('background-color', groundUpdate.ground["background-color"])
+      }
+    }
   }
 
   editBackground() {
@@ -48,20 +70,29 @@ export class PortifolioComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe( result => {
+      this.setBackground(result)
       if(result) {
-        const folio = $('.folio')
-        folio.css('background', '')
-        folio.css('background-image', '')
-        folio.css('background-repeat', '')
-        folio.css('background-color', '')
-
-        folio.css('background-image', result["background-image"])
-        folio.css('background-color', result["background-color"])
-        folio.css('background-repeat', result["background-repeat"])
-        $('h1').css('color', result["color"])
-        $('h2').css('color', result["color"])
+        this.layoutService.updateLayout(this.userId, {background: result})
+          .subscribe(res => {
+            this.snackBar.open("Background atualizado com sucesso.", 'Fechar', {duration: 3000});
+          })
       }
     });
   }
 
+  setBackground(background) {
+    if(background) {
+      const folio = $('.folio')
+      folio.css('background', '')
+      folio.css('background-image', '')
+      folio.css('background-repeat', '')
+      folio.css('background-color', '')
+
+      folio.css('background-image', background["background-image"])
+      folio.css('background-color', background["background-color"])
+      folio.css('background-repeat', background["background-repeat"])
+      $('h1').css('color', background["color"])
+      $('h2').css('color', background["color"])
+    }
+  }
 }

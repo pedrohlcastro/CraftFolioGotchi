@@ -8,10 +8,10 @@ import { PortifolioComponent } from './components/portifolio/portifolio.componen
 
 
 const ROUTES: Routes = [
-    // { path: '', component: HomePageComponent },
+    { path: '', component: HomePageComponent },
     { path: 'sign-in', component: SignInComponent },
     { path: 'sign-up', component: SignUpComponent },
-    { path: '', component: PortifolioComponent}
+    { path: 'folio/:userId', component: PortifolioComponent}
   ];
   
 @NgModule({

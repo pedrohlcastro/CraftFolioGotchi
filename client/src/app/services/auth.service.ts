@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 export class AuthService {
   private userToken;
   public loggedIn = new BehaviorSubject <boolean>(false);
+  public userIdChange = new BehaviorSubject <string>("");
 
   constructor(private http: Http) { this.userToken = null; }
 
@@ -42,7 +43,8 @@ export class AuthService {
         if (this.userToken) {
           localStorage.setItem('userToken', JSON.stringify({ token: this.userToken }));
           this.loggedIn.next(true);
-          return true;
+          this.userIdChange.next(resJSON.userId)
+          return resJSON;
         }
         return resJSON;
       });
@@ -55,15 +57,30 @@ export class AuthService {
         const resJSON = res.json();
         if (resJSON.result === 'Success') {
           this.loggedIn.next(true);
+          this.userIdChange.next(resJSON.userId)
         }
         return resJSON;
       });
+  }
+
+  getToken() {
+    if (this.userToken) {
+      return this.userToken;
+    } else {
+      const userToken = JSON.parse(localStorage.getItem('userToken'));
+      if (userToken) {
+        return userToken.token;
+      } else {
+        return null;
+      }
+    }
   }
   
   // logout method
   logout(): void {
     // clear token remove user from local storage to log user out
     this.loggedIn.next(false);
+    this.userIdChange.next("")
     this.userToken = null;
     localStorage.removeItem('userToken');
   }

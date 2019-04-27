@@ -22,6 +22,8 @@ const userSchema = new Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
     },
     password: { type: String, required: true },
+    background: { type: Object, required: false },
+    ground: { type: Object, required: false },
 });
 
 

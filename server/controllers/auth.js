@@ -57,7 +57,7 @@ class AuthController {
             };
             let token = 'Bearer ';
             token += jwt.sign(payload, this.jwtSecret, options);
-            resolve({ result: 'Success', token, userType: user.userType });
+            resolve({ result: 'Success', token, userId: user._id });
         });
     }
 
@@ -66,7 +66,7 @@ class AuthController {
             if (user) {
                 const resJSON = {
                     result: 'Success',
-                    userType: user.userType,
+                    userId: user.id,
                 };
                 resolve(resJSON);
             }

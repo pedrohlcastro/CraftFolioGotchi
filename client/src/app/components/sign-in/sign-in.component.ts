@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -24,6 +25,7 @@ export class SignInComponent implements OnInit {
   constructor(
     private authService:AuthService,
     private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -42,9 +44,9 @@ export class SignInComponent implements OnInit {
     this.authService.loginUser(requestUser)
       .subscribe((res) => {
         this.snackBar.open("Login efetuado com sucesso.", 'Fechar', {duration: 3000});
+        this.router.navigateByUrl(`/folio/${res.userId}`);
       },
       error => {
-        console.log(error.statusText);
         this.snackBar.open("Não foi possível efetuar login, favor tentar novamente.", 'Fechar', {duration: 3000});
       });
   }

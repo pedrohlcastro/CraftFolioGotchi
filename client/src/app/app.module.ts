@@ -23,6 +23,7 @@ import { PortifolioComponent } from './components/portifolio/portifolio.componen
 import { PetComponent } from './components/pet/pet.component';
 import { EditGroundDialogComponent } from './components/edit-ground-dialog/edit-ground-dialog.component';
 import { EditBackgroudDialogComponent } from './components/edit-backgroud-dialog/edit-backgroud-dialog.component';
+import { LayoutService } from './services/layout.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { EditBackgroudDialogComponent } from './components/edit-backgroud-dialog
     NgImageSliderModule,
     ColorPickerModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, LayoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

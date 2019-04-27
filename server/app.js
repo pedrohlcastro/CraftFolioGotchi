@@ -36,6 +36,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 database.init(mongoose);
 
 app.use('/api/auth', require('./routes').auth);
+app.use('/api/layout', require('./routes').layout);
 
 // Error handler
 app.use((err, req, res, next) => {
