@@ -24,6 +24,9 @@ import { PetComponent } from './components/pet/pet.component';
 import { EditGroundDialogComponent } from './components/edit-ground-dialog/edit-ground-dialog.component';
 import { EditBackgroudDialogComponent } from './components/edit-backgroud-dialog/edit-backgroud-dialog.component';
 import { LayoutService } from './services/layout.service';
+import { EditTextDialogComponent } from './components/edit-text-dialog/edit-text-dialog.component';
+import { TextService } from './services/text.service';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,14 +38,18 @@ import { LayoutService } from './services/layout.service';
     PortifolioComponent,
     PetComponent,
     EditGroundDialogComponent,
-    EditBackgroudDialogComponent
+    EditBackgroudDialogComponent,
+    EditTextDialogComponent,
+    ConfirmDialogComponent
   ],
   entryComponents: [
     EditGroundDialogComponent,
-    EditBackgroudDialogComponent
+    EditBackgroudDialogComponent,
+    EditTextDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AppMaterialModule,
@@ -52,7 +59,7 @@ import { LayoutService } from './services/layout.service';
     NgImageSliderModule,
     ColorPickerModule,
   ],
-  providers: [AuthService, LayoutService],
+  providers: [AuthService, LayoutService, TextService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,9 @@ import { MatDialog, MatSnackBar, PageEvent } from '@angular/material';
 import { EditBackgroudDialogComponent } from '../edit-backgroud-dialog/edit-backgroud-dialog.component';
 import { ActivatedRoute } from '@angular/router';
 import { LayoutService } from '../../services/layout.service';
+import { EditTextDialogComponent } from '../edit-text-dialog/edit-text-dialog.component';
+import { TextService } from '../../services/text.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 declare const $;
 
@@ -16,22 +19,7 @@ export class PortifolioComponent implements OnInit {
   imageObject:Array<object>
   userId
   layout
-  texts = [
-    {
-      "text": "Some random lorem text",
-      "background-color": "white",
-      "border-color": "blue",
-      "font-size": "30px",
-      "text-color": "black"
-    },
-    {
-      "text": "Some random lorem text 222",
-      "background-color": "black",
-      "border-color": "blue",
-      "font-size": "30px",
-      "text-color": "white"
-    },
-  ]
+  texts = []
   // MatPaginator Output
   pageEvent: PageEvent;
   constructor(
@@ -39,6 +27,7 @@ export class PortifolioComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private layoutService: LayoutService,
     private snackBar: MatSnackBar,
+    private textService: TextService
   ) { }
 
   ngOnInit() {
@@ -47,6 +36,9 @@ export class PortifolioComponent implements OnInit {
       this.layout = res;
       this.setGround(res.ground);
       this.setBackground(res.background);
+      this.textService.getAllByUser(this.userId).subscribe((res) => {
+        this.texts = res;
+      })
     })
   }
 
@@ -119,5 +111,56 @@ export class PortifolioComponent implements OnInit {
     }
   }
 
+  createText() {
+    let dialogRef = this.dialog.open(EditTextDialogComponent, {
+      width: '75%'
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      if(result) {
+        this.textService.createText(result).subscribe((res) => {
+          if(res) {
+            this.texts.push(res)
+          }
+        });
+      }
+    });
+  }
+
+  editText() {
+    const currentText = this.texts[this.pageEvent ? this.pageEvent.pageIndex : 0]
+    let dialogRef = this.dialog.open(EditTextDialogComponent, {
+      width: '75%',
+      data: currentText
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      if(result) {
+        this.textService.updateText(result, currentText._id).subscribe((res) => {
+          if(res) {
+            this.texts[this.pageEvent ? this.pageEvent.pageIndex : 0] = result
+          }
+        });
+      }
+    });
+  }
+
+  deleteText() {
+    const currentText = this.texts[this.pageEvent ? this.pageEvent.pageIndex : 0]
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '75%',
+      data: "Você tem certeza que deseja deletar esse texto?"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.textService.deleteText(currentText._id).subscribe((res) => {
+          if(res) {
+            this.texts.splice(currentText._id,1);
+          }
+        })
+      }
+    })
+  }
 
 }

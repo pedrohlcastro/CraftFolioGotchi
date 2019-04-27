@@ -8,15 +8,19 @@ const textSchema = new Schema({
         type: String,
         required: true,
     },
-    border: {
+    'background-color': {
         type: String,
         required: true,
     },
-    color: {
+    'border-color': {
         type: String,
         required: true,
     },
-    fontFamily: {
+    'font-size': {
+        type: String,
+        required: true,
+    },
+    'text-color': {
         type: String,
         required: true,
     },

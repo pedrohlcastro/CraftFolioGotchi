@@ -1,0 +1,27 @@
+<div class="inputs-area">
+  <mat-form-field>
+    <textarea matInput placeholder="Texto"  [(ngModel)]="text" [ngModelOptions]="{standalone: true}" required></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Tamanho Fonte. Ex: 30px" [(ngModel)]="fontSize" [ngModelOptions]="{standalone: true}" required>
+  </mat-form-field>
+
+
+  <label for="color-picker">Cor do fundo</label>  
+  <input [(colorPicker)]="backgroundColor" [style.background]="backgroundColor" id="color-picker"/>  <br><br>
+
+  <label for="color-picker">Cor dos Titulos</label>
+  <input [(colorPicker)]="textColor" [style.background]="textColor" id="color-picker"/> <br><br>
+
+  <label for="color-picker">Cor da Borda</label>
+  <input [(colorPicker)]="borderColor" [style.background]="borderColor" id="color-picker"/>
+</div>
+
+<div class="btn-area">
+  <button mat-raised-button color="warn" (click)="exit(false)">
+    <i class="material-icons">cancel</i> Cancelar
+  </button>
+  <button mat-raised-button color="primary" (click)="exit(true)">
+    <i class="material-icons">check</i> Confirmar
+  </button>
+</div>

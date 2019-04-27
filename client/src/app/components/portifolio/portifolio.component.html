@@ -9,11 +9,23 @@
   </div>
   <div class="text-boxes">
       <h2>Texts</h2>
-      <mat-paginator [length]="texts.length"
-          pageSize="1"
-          (page)="pageEvent = $event">
-      </mat-paginator>
-      <div
+      <div class="comands">
+        <button (click)="editText()" mat-mini-fab color="primary" matTooltip="Editar Texto" matTooltipPosition="right">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="createText()" mat-mini-fab color="primary" matTooltip="Adicionar novo Texto" matTooltipPosition="right">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button (click)="deleteText()" mat-mini-fab  color="primary" matTooltip="Deletar Texto" matTooltipPosition="right">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <mat-paginator [length]="texts.length"
+            pageSize="1"
+            (page)="pageEvent = $event">
+        </mat-paginator>
+      </div>
+      
+      <div ng-if="texts"
         [style.backgroundColor]="texts[pageEvent ? pageEvent.pageIndex : 0]['background-color']"
         [style.border-color]="texts[pageEvent ? pageEvent.pageIndex : 0]['border-color']"
         [style.font-size]="texts[pageEvent ? pageEvent.pageIndex : 0]['font-size']"

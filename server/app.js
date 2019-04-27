@@ -37,6 +37,7 @@ database.init(mongoose);
 
 app.use('/api/auth', require('./routes').auth);
 app.use('/api/layout', require('./routes').layout);
+app.use('/api/text', require('./routes').text);
 
 // Error handler
 app.use((err, req, res, next) => {
