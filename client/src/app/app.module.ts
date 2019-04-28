@@ -29,6 +29,9 @@ import { TextService } from './services/text.service';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { EditImgOrVideoDialogComponent } from './components/edit-img-or-video-dialog/edit-img-or-video-dialog.component';
 import { MediaService } from './services/media.service';
+import { ShareDialogComponent } from './components/share-dialog/share-dialog.component';
+import { ShareButtonsModule } from 'ngx-sharebuttons';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -43,14 +46,16 @@ import { MediaService } from './services/media.service';
     EditBackgroudDialogComponent,
     EditTextDialogComponent,
     ConfirmDialogComponent,
-    EditImgOrVideoDialogComponent
+    EditImgOrVideoDialogComponent,
+    ShareDialogComponent
   ],
   entryComponents: [
     EditGroundDialogComponent,
     EditBackgroudDialogComponent,
     EditTextDialogComponent,
     ConfirmDialogComponent,
-    EditImgOrVideoDialogComponent
+    EditImgOrVideoDialogComponent,
+    ShareDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +67,9 @@ import { MediaService } from './services/media.service';
     ReactiveFormsModule,
     NgImageSliderModule,
     ColorPickerModule,
+    HttpClientModule,
+    HttpClientJsonpModule,
+    ShareButtonsModule.forRoot()
   ],
   providers: [AuthService, LayoutService, TextService, MediaService],
   bootstrap: [AppComponent]

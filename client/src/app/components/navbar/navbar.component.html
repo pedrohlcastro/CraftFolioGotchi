@@ -9,7 +9,7 @@
 
   <!-- ROTAS COMUNS USUARIO AUTENTICADO -->
   <a (click)="navToEdit()" *ngIf="isAuthenticated"><i class="material-icons">edit</i>Editar</a>
-  <a (click)="share()" *ngIf="isAuthenticated"><i class="material-icons">share</i>Compartilhar</a>
+  <a (click)="share()" *ngIf="!isAuthenticated"><i class="material-icons">share</i>Compartilhar</a>
   <a (click)="logout()" *ngIf="isAuthenticated"><i class="material-icons">vpn_key</i>Logout</a>
 
 </div>

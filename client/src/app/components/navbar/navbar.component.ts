@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
 declare const $;
 
@@ -15,7 +16,12 @@ export class NavbarComponent implements OnInit {
   isAuthenticated: boolean;
   userId:string;
 
-  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
+  constructor(
+    private authService: AuthService,
+    private router: Router, 
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+  ) {
     this.authService.loggedIn.subscribe(status => this.isAuthenticated = status);
     this.authService.userIdChange.subscribe(userId => this.userId)
   }
@@ -38,7 +44,9 @@ export class NavbarComponent implements OnInit {
   }
 
   share() {
-    console.log("share")
+    this.dialog.open(ShareDialogComponent, {
+      width: '50%'
+    });
   }
 
   logout() {

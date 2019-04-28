@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+/** Import core style */
+@import "~ngx-sharebuttons/styles/share-buttons";
+ 
+/** Import a theme */
+@import "~ngx-sharebuttons/styles/themes/circles/circles-theme";
+
 *{
     margin: 0;
     padding: 0;
