@@ -1,0 +1,49 @@
+@import '~custom-material-theme.scss';
+
+section{
+    width: 100%;
+    min-width: 100%;
+    background: #ECE9E6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    height: calc(100vh - 75px);
+    min-height: calc(100vh - 75px);
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    div {
+        flex-basis: 100%;
+        margin: 5%;
+    }
+    .search{
+        text-align: center;
+        flex-basis: 100%;
+        width: 100%;
+        mat-form-field {
+            margin-top: 10px;
+            width: 100%;
+        }
+    }
+
+    .btn-area {
+        button{
+            width: 122.4px;
+        }
+    }
+
+}
+
+
+#triangle-bottomright {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 300px 300px;
+    border-color: transparent transparent #674ab7 transparent;
+    display: inline;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    // margin-left: calc(100%-300px);
+}
