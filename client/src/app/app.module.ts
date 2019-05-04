@@ -32,6 +32,7 @@ import { MediaService } from './services/media.service';
 import { ShareDialogComponent } from './components/share-dialog/share-dialog.component';
 import { ShareButtonsModule } from 'ngx-sharebuttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { BoardDialogComponent } from './components/board-dialog/board-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
     EditTextDialogComponent,
     ConfirmDialogComponent,
     EditImgOrVideoDialogComponent,
-    ShareDialogComponent
+    ShareDialogComponent,
+    BoardDialogComponent
   ],
   entryComponents: [
     EditGroundDialogComponent,
@@ -55,7 +57,8 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
     EditTextDialogComponent,
     ConfirmDialogComponent,
     EditImgOrVideoDialogComponent,
-    ShareDialogComponent
+    ShareDialogComponent,
+    BoardDialogComponent,
   ],
   imports: [
     BrowserModule,

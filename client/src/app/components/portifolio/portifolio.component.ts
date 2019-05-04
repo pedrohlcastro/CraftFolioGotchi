@@ -11,6 +11,7 @@ import { NgImageSliderComponent } from 'ng-image-slider';
 import { EditImgOrVideoDialogComponent } from '../edit-img-or-video-dialog/edit-img-or-video-dialog.component';
 import { MediaService } from '../../services/media.service';
 import { AuthService } from '../../services/auth.service';
+import { BoardDialogComponent } from '../board-dialog/board-dialog.component';
 
 declare const $;
 
@@ -47,7 +48,9 @@ export class PortifolioComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId')
-    this.authService.userIdChange.subscribe(status => this.isAuthenticated = this.userId == status);
+    this.authService.userIdChange.subscribe(status => {
+      this.isAuthenticated = this.userId == status;
+    });
     
     this.sliderImageWidth = $(document).width()
     $( window ).resize(() => {
@@ -67,6 +70,24 @@ export class PortifolioComponent implements OnInit {
         })
       })
     })
+  }
+
+  openBoard() {
+    let dialogRef = this.dialog.open(BoardDialogComponent, {
+      width: '75%',
+      data: {
+        text: this.layout.board,
+        isAuthenticated: this.isAuthenticated
+      }
+    });
+    dialogRef.afterClosed().subscribe( result => {
+      if(result) {
+        this.layoutService.updateLayout(this.userId, {board: result})
+          .subscribe(res => {
+            this.snackBar.open("Placa atualizada com sucesso.", 'Fechar', {duration: 3000});
+          })
+      }
+    });
   }
 
   editGround(){

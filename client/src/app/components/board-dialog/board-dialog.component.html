@@ -1,0 +1,17 @@
+<div class="inputs-area" *ngIf="edit">
+  <mat-form-field>
+    <input matInput placeholder="Mensagem para o usuário" [(ngModel)]="text" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <div class="btn-area">
+    <button mat-raised-button class="delete-btn" color="warn" (click)="exit(false)">
+      <i class="material-icons">cancel</i> Cancelar
+    </button>
+    <button mat-raised-button class="edit-btn" color="primary" (click)="exit(true)">
+      <i class="material-icons">check</i> Confirmar
+    </button>
+  </div>
+</div>
+<div class="text-area" *ngIf="!edit">
+  <h3>{{text}}</h3>
+<div>
+

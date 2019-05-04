@@ -24,6 +24,7 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     background: { type: Object, required: false },
     ground: { type: Object, required: false },
+    board: { type: String, required: false },
 });
 
 

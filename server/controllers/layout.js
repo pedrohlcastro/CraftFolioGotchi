@@ -8,7 +8,7 @@ class LayoutController {
     // GET layout from User
     getLayout(userId) {
         return new Promise((resolve, reject) => {
-            this.models.User.findById(userId).select({ background: 1, ground: 1 })
+            this.models.User.findById(userId).select({ background: 1, ground: 1, board: 1 })
                 .exec((err, layout) => {
                     if (err) {
                         reject({ status: 500, msg: 'Cannot get Layoyt - Internal Error', err });
