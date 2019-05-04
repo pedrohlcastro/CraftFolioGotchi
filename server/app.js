@@ -6,6 +6,8 @@ const cors = require('cors');
 const compress = require('compression');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const path = require('path');
+require('dotenv').config();
 
 const database = require('./database');
 const middlewares = require('./middlewares');
@@ -39,6 +41,15 @@ app.use('/api/auth', require('./routes').auth);
 app.use('/api/layout', require('./routes').layout);
 app.use('/api/text', require('./routes').text);
 app.use('/api/media', require('./routes').media);
+
+
+// Point static path to dist
+app.use(express.static(path.join(__dirname, '../client/dist/')));
+
+// Call Angular
+app.all('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
 
 // Error handler
 app.use((err, req, res, next) => {

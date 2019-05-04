@@ -8,5 +8,12 @@ module.exports = (mongoose) => {
             // eslint-disable-next-line no-console
             console.log('MongoDB connected');
         });
+    } else if (ENV === 'prod') {
+        mongoose.connect(process.env.MONGO, { useCreateIndex: true, useNewUrlParser: true });
+        mongoose.connection.on('error', () => { throw new Error('MongoDb failed'); });
+        mongoose.connection.once('open', () => {
+            // eslint-disable-next-line no-console
+            console.log('MongoDB connected');
+        });
     }
 };
