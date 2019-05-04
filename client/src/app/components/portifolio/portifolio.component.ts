@@ -48,6 +48,7 @@ export class PortifolioComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId')
+    this.authService.checkToken().subscribe();
     this.authService.userIdChange.subscribe(status => {
       this.isAuthenticated = this.userId == status;
     });
@@ -56,6 +57,7 @@ export class PortifolioComponent implements OnInit {
     $( window ).resize(() => {
       this.sliderImageWidth = $(document).width()
     });
+    
     this.layoutService.getLayout(this.userId).subscribe((res) => {
       this.layout = res;
       this.setGround(res.ground);
