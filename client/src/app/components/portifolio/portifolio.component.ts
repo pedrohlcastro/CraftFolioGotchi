@@ -129,7 +129,7 @@ export class PortifolioComponent implements OnInit {
   editBackground() {
     let dialogRef = this.dialog.open(EditBackgroudDialogComponent, {
       width: '75%',
-      data: this.layout.background
+      data: this.layout.background || null
     });
 
     dialogRef.afterClosed().subscribe( result => {
