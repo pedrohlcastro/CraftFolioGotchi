@@ -21,4 +21,7 @@ export class HomePageComponent implements OnInit {
     this.router.navigateByUrl('/sign-up')
   }
 
+  goToSearch() {
+    this.router.navigateByUrl(`/search/${encodeURI(this.name)}`)
+  }
 }

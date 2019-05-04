@@ -8,6 +8,20 @@ class AuthController {
         this.jwtSecret = process.env.JWT_SECRET || 'super-craft';
     }
 
+    searchUsers(param) {
+        const searchParam = `${param}`;
+        return new Promise((resolve, reject) => {
+            this.models.User.find({ name: { $regex: searchParam, $options: 'i' } }).select({ _id: 1, name: 1 })
+                .exec((err, data) => {
+                    if (err) {
+                        reject({ status: 500, msg: 'Internal Erro', err });
+                    } else {
+                        resolve(data);
+                    }
+                });
+        });
+    }
+
     getName(userId) {
         return new Promise((resolve, reject) => {
             this.models.User.findById(userId).select({ name: 1 })

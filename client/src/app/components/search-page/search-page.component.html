@@ -1,0 +1,6 @@
+<h2>Usuários encontrados:</h2>
+<div class="container" *ngFor="let user of users; let i = index">
+  <mat-card (click)="goToPage(user._id)">
+    {{user.name}}
+  </mat-card>
+</div>

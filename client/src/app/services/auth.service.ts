@@ -86,6 +86,16 @@ export class AuthService {
         return res.json();
       });
   }
+
+  search(param) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = new RequestOptions({ headers: headers, params: { param: param } });
+    return this.http.get(`/api/auth/search/`, options)
+      .map((res) => {
+        return res.json();
+      });
+  }
   
   // logout method
   logout(): void {

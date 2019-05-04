@@ -33,6 +33,7 @@ import { ShareDialogComponent } from './components/share-dialog/share-dialog.com
 import { ShareButtonsModule } from 'ngx-sharebuttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { BoardDialogComponent } from './components/board-dialog/board-dialog.component';
+import { SearchPageComponent } from './components/search-page/search-page.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { BoardDialogComponent } from './components/board-dialog/board-dialog.com
     ConfirmDialogComponent,
     EditImgOrVideoDialogComponent,
     ShareDialogComponent,
-    BoardDialogComponent
+    BoardDialogComponent,
+    SearchPageComponent
   ],
   entryComponents: [
     EditGroundDialogComponent,

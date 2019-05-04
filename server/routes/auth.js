@@ -17,6 +17,17 @@ router.get('/name/:userId', (req, res, next) => {
         });
 });
 
+router.get('/search', (req, res, next) => {
+    const param = req.query.param;
+    controllers.Auth.searchUsers(param)
+        .then((data) => {
+            res.status(200).json(data);
+        })
+        .catch((err) => {
+            next(err);
+        });
+});
+
 // SignUp route
 router.post('/signup', (req, res, next) => {
     const user = req.body;

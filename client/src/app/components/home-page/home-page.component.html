@@ -1,7 +1,7 @@
 <section>
   <div class="search">
     <h3>Bem vindo, ao CraftFolioGotchi, um lugar onde você compartilhar informações e ter seu pet.</h3>
-    <mat-form-field>
+    <mat-form-field (keyup.enter)="goToSearch()">
       <input matInput placeholder="Buscar amigo" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
