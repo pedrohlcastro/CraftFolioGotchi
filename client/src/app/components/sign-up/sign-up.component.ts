@@ -18,6 +18,7 @@ export class SignUpComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.authService.checkToken().subscribe();
   }
   registerForm = new FormGroup({
     name: new FormControl('', [

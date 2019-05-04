@@ -29,6 +29,7 @@ export class SignInComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.authService.checkToken().subscribe();
   }
 
   login(){

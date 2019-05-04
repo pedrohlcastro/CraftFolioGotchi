@@ -18,6 +18,7 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit() {
     this.param = this.activatedRoute.snapshot.paramMap.get('param')
+    this.authService.checkToken().subscribe();
     this.authService.search(decodeURI(this.param)).subscribe((res) => {
       this.users = res;
     })
