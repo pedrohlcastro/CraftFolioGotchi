@@ -43,6 +43,9 @@ app.use('/api/text', require('./routes').text);
 app.use('/api/media', require('./routes').media);
 
 
+// Point static path to dist
+app.use(express.static(path.join(__dirname, '../client/dist/')));
+
 // Call Angular
 app.all('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
